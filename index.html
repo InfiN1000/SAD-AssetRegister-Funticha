@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Lab Asset Register — Role-Based Transaction &amp; Approval System</title>
+<link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+<!-- ============================== AUTH VIEW ============================== -->
+<div id="auth-view">
+  <div class="auth-card">
+    <p class="brand">Asset<span>Register</span></p>
+    <p class="tagline">Laboratory equipment &amp; borrowing management</p>
+
+    <form id="login-form">
+      <div class="field">
+        <label for="login-email">Email</label>
+        <input id="login-email" type="email" required autocomplete="email" />
+      </div>
+      <div class="field">
+        <label for="login-password">Password</label>
+        <input id="login-password" type="password" required autocomplete="current-password" />
+      </div>
+      <p class="form-error" id="login-error"></p>
+      <button type="submit" class="btn btn-primary btn-block">Log in</button>
+    </form>
+
+    <form id="signup-form" class="hidden">
+      <div class="field">
+        <label for="signup-name">Full name</label>
+        <input id="signup-name" type="text" required />
+      </div>
+      <div class="field">
+        <label for="signup-email">Email</label>
+        <input id="signup-email" type="email" required autocomplete="email" />
+      </div>
+      <div class="field">
+        <label for="signup-password">Password</label>
+        <input id="signup-password" type="password" required minlength="6" autocomplete="new-password" />
+      </div>
+      <p class="form-error" id="signup-error"></p>
+      <button type="submit" class="btn btn-primary btn-block">Create account</button>
+      <p style="color: var(--text-dim); font-size: 0.75rem; margin-top: 10px;">
+        New accounts start as a Requester / Viewer. An administrator can raise your role afterward.
+      </p>
+    </form>
+
+    <p class="auth-switch">
+      <span id="switch-to-signup-wrap">Need an account? <button type="button" id="switch-to-signup">Sign up</button></span>
+      <span id="switch-to-login-wrap" class="hidden">Already have an account? <button type="button" id="switch-to-login">Log in</button></span>
+    </p>
+  </div>
+</div>
+
+<!-- ============================== APP VIEW ============================== -->
+<div id="app-view" class="hidden">
+  <nav class="sidebar">
+    <div class="brand">Asset<span>Register</span></div>
+
+    <button class="nav-item" data-view="equipment">Equipment</button>
+    <button class="nav-item" data-view="my-requests" id="nav-my-requests">My Requests</button>
+    <button class="nav-item" data-view="approvals" id="nav-approvals">Approvals</button>
+    <button class="nav-item" data-view="operations" id="nav-operations">Release &amp; Returns</button>
+    <button class="nav-item" data-view="maintenance" id="nav-maintenance">Maintenance</button>
+    <button class="nav-item" data-view="users" id="nav-users">Users</button>
+    <button class="nav-item" data-view="audit" id="nav-audit">Audit Log</button>
+
+    <div class="sidebar-footer">
+      <div class="user-chip">
+        <div class="name" id="chip-name">—</div>
+        <span class="role-tag" id="chip-role">—</span>
+      </div>
+      <button class="btn btn-ghost btn-block btn-sm" id="logout-btn" style="margin-top:8px;">Log out</button>
+    </div>
+  </nav>
+
+  <main>
+    <!-- Equipment (all roles) -->
+    <section id="view-equipment" data-role-view>
+      <div class="view-header">
+        <div>
+          <h1>Equipment</h1>
+          <p>Current inventory and availability status.</p>
+        </div>
+        <button class="btn btn-primary btn-sm hidden" id="add-equipment-btn">+ Add equipment</button>
+      </div>
+      <div id="equipment-table-wrap"></div>
+    </section>
+
+    <!-- My Requests (requester) -->
+    <section id="view-my-requests" class="hidden" data-role-view>
+      <div class="view-header">
+        <div>
+          <h1>My Requests</h1>
+          <p>Track the status of equipment you've requested to borrow.</p>
+        </div>
+      </div>
+      <div id="my-requests-table-wrap"></div>
+    </section>
+
+    <!-- Approvals (admin) -->
+    <section id="view-approvals" class="hidden" data-role-view>
+      <div class="view-header">
+        <div>
+          <h1>Approvals</h1>
+          <p>Review pending borrowing requests. BR-A4-02: you cannot approve your own request.</p>
+        </div>
+      </div>
+      <div id="approvals-table-wrap"></div>
+    </section>
+
+    <!-- Operations: release & return (staff/admin) -->
+    <section id="view-operations" class="hidden" data-role-view>
+      <div class="view-header">
+        <div>
+          <h1>Release &amp; Returns</h1>
+          <p>Hand off approved equipment and process returns.</p>
+        </div>
+      </div>
+      <div id="operations-table-wrap"></div>
+    </section>
+
+    <!-- Maintenance -->
+    <section id="view-maintenance" class="hidden" data-role-view>
+      <div class="view-header">
+        <div>
+          <h1>Maintenance</h1>
+          <p>Flag equipment issues and track repairs.</p>
+        </div>
+        <button class="btn btn-primary btn-sm hidden" id="open-maintenance-btn">+ Report issue</button>
+      </div>
+      <div id="maintenance-table-wrap"></div>
+    </section>
+
+    <!-- Users (admin) -->
+    <section id="view-users" class="hidden" data-role-view>
+      <div class="view-header">
+        <div>
+          <h1>Users</h1>
+          <p>Manage roles. Changes are written to the audit log.</p>
+        </div>
+      </div>
+      <div id="users-table-wrap"></div>
+    </section>
+
+    <!-- Audit Log (admin) -->
+    <section id="view-audit" class="hidden" data-role-view>
+      <div class="view-header">
+        <div>
+          <h1>Audit Log</h1>
+          <p>BR-A4-10: every sensitive action is recorded here automatically.</p>
+        </div>
+      </div>
+      <div id="audit-list-wrap"></div>
+    </section>
+  </main>
+</div>
+
+<div class="toast-area" id="toast-area"></div>
+
+<script type="module" src="js/app.js"></script>
+</body>
+</html>
