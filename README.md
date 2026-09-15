@@ -5,10 +5,105 @@ System for role-based lab asset borrowing, approval workflow, and audit logging 
 
 # Entity-Relationship Diagram
 
-**Entity-Relationship Diagram**
+```mermaid
+erDiagram
+    PROFILES ||--o{ BORROWING_REQUESTS : "requests (requester_id)"
+    PROFILES ||--o{ BORROWING_REQUESTS : "reviews (reviewed_by)"
+    PROFILES ||--o{ BORROWING_REQUESTS : "releases (released_by)"
+    PROFILES ||--o{ BORROWING_REQUESTS : "returns (returned_by)"
+    PROFILES ||--o{ MAINTENANCE_REQUESTS : "reports (requested_by)"
+    PROFILES ||--o{ AUDIT_LOGS : "performs (user_id)"
+    EQUIPMENT ||--o{ BORROWING_REQUESTS : "is borrowed via"
+    EQUIPMENT ||--o{ MAINTENANCE_REQUESTS : "has issues"
+
+    PROFILES {
+        uuid id PK
+        text full_name
+        user_role role
+        timestamptz created_at
+    }
+    EQUIPMENT {
+        bigint id PK
+        text code UK
+        text name
+        text category
+        equipment_status status
+        text notes
+    }
+    BORROWING_REQUESTS {
+        bigint id PK
+        uuid requester_id FK
+        bigint equipment_id FK
+        request_status status
+        text purpose
+        uuid reviewed_by FK
+        uuid released_by FK
+        uuid returned_by FK
+        text return_condition
+        timestamptz due_at
+    }
+    MAINTENANCE_REQUESTS {
+        bigint id PK
+        bigint equipment_id FK
+        uuid requested_by FK
+        text issue_description
+        maintenance_status status
+    }
+    AUDIT_LOGS {
+        bigint id PK
+        uuid user_id FK
+        text action
+        text module
+        text record_id
+        text description
+        timestamptz created_at
+    }
+```
 
 # Use Case Diagram
 
+```mermaid
+flowchart LR
+    Admin([Administrator])
+    Staff([Laboratory Staff])
+    Req([Requester / Viewer])
+
+    subgraph System["Lab Asset Register"]
+        UC1((View equipment))
+        UC2((Submit borrowing request))
+        UC3((View own request history))
+        UC4((Create borrowing transaction))
+        UC5((Process return))
+        UC6((Submit maintenance request))
+        UC7((Manage users & roles))
+        UC8((Approve / reject request))
+        UC9((Manage equipment))
+        UC10((Resolve maintenance request))
+        UC11((View audit logs))
+        UC12((Release equipment))
+    end
+
+    Req --> UC1
+    Req --> UC2
+    Req --> UC3
+
+    Staff --> UC1
+    Staff --> UC2
+    Staff --> UC3
+    Staff --> UC4
+    Staff --> UC5
+    Staff --> UC6
+    Staff --> UC12
+
+    Admin --> UC1
+    Admin --> UC7
+    Admin --> UC8
+    Admin --> UC9
+    Admin --> UC10
+    Admin --> UC11
+    Admin --> UC12
+    Admin --> UC5
+```
 
 ## 4. Role-Permission Matrix
 
