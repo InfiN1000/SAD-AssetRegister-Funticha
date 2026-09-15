@@ -168,15 +168,15 @@ All rules are enforced as PostgreSQL `security definer` functions, not just fron
 
 | Test ID | Scenario | Expected Result | Result |
 |---|---|---|---|
-| TC-A4-01 | Viewer attempts to open Admin page | Access denied | ☐ |
-| TC-A4-02 | Staff submits request | Request saved as Pending | ☐ |
-| TC-A4-03 | Administrator approves request | Status becomes Approved; audit log created | ☐ |
-| TC-A4-04 | Administrator rejects request | Status becomes Rejected | ☐ |
-| TC-A4-05 | Attempt to release rejected request | Operation blocked | ☐ |
-| TC-A4-06 | Release approved equipment | Equipment becomes Borrowed | ☐ |
-| TC-A4-07 | Return released equipment | Equipment returns to appropriate status | ☐ |
-| TC-A4-08 | Check audit log after approval | Approval entry is visible | ☐ |
-| TC-A4-09 | Staff attempts restricted delete | Operation blocked | ☐ |
-| TC-A4-10 | Logout and open protected page | Redirected to login / access denied | ☐ |
+| TC-A4-01 | Viewer attempts to open Admin page | Access denied | Pass |
+| TC-A4-02 | Staff submits request | Request saved as Pending | Pass |
+| TC-A4-03 | Administrator approves request | Status becomes Approved; audit log created | Pass |
+| TC-A4-04 | Administrator rejects request | Status becomes Rejected | Pass |
+| TC-A4-05 | Attempt to release rejected request | Operation blocked | Pass |
+| TC-A4-06 | Release approved equipment | Equipment becomes Borrowed | Pass |
+| TC-A4-07 | Return released equipment | Equipment returns to appropriate status | Pass |
+| TC-A4-08 | Check audit log after approval | Approval entry is visible | Pass |
+| TC-A4-09 | Staff attempts restricted delete | Operation blocked | Pass |
+| TC-A4-10 | Logout and open protected page | Redirected to login / access denied | Pass |
 
 Full details on how each test was triggered: [`docs/functional-test-results.md`](docs/functional-test-results.md)
