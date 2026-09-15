@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Lab Asset Register — Role-Based Asset Transaction and Approval Management
 
 Systems Analysis and Design — Lab 4-A. A static frontend (deployable to GitHub Pages)
@@ -91,3 +92,7 @@ for exactly where each BR-A4-xx rule is enforced in code.
 | Business rules | `docs/business-rules.md` |
 | Audit-log screenshot | Take one from the **Audit Log** tab after running a few actions |
 | Functional test results | `docs/functional-test-results.md` |
+=======
+# SAD-AssetRegister-Funticha
+System for role-based lab asset borrowing, approval workflow, and audit logging (GitHub Pages + Supabase).
+>>>>>>> c69623849d2e89fb9670089b883390047777d22a
