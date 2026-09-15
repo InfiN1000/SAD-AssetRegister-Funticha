@@ -2,7 +2,6 @@
 
 System for role-based lab asset borrowing, approval workflow, and audit logging (GitHub Pages + Supabase).
 
-
 # Entity-Relationship Diagram
 
 ```mermaid
@@ -162,7 +161,7 @@ All rules are enforced as PostgreSQL `security definer` functions, not just fron
 
 ## 7. Audit-Log Screenshot
 
-<!-- Paste your Audit Log tab screenshot here, e.g.: ![Audit Log](docs/images/audit-log.png) -->
+![Login](images/AuditLog.png)
 
 ## 8. Functional Test Results
 
@@ -178,5 +177,3 @@ All rules are enforced as PostgreSQL `security definer` functions, not just fron
 | TC-A4-08 | Check audit log after approval | Approval entry is visible | Pass |
 | TC-A4-09 | Staff attempts restricted delete | Operation blocked | Pass |
 | TC-A4-10 | Logout and open protected page | Redirected to login / access denied | Pass |
-
-Full details on how each test was triggered: [`docs/functional-test-results.md`](docs/functional-test-results.md)
