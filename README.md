@@ -2,10 +2,7 @@
 
 System for role-based lab asset borrowing, approval workflow, and audit logging (GitHub Pages + Supabase).
 
-## 1. GitHub Repository URL
-https://github.com/InfiN1000/SAD-AssetRegister-Funticha
-
-## 2. Live GitHub Pages URL
+## Live GitHub Pages URL
 https://infin1000.github.io/SAD-AssetRegister-Funticha/
 
 # Entity-Relationship Diagram
