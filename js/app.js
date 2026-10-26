@@ -251,7 +251,7 @@ async function renderEquipment() {
 
   if (!data.length) { wrap.innerHTML = `<div class="empty-state">No equipment on record yet.</div>`; return; }
 
-  const canRequest = currentProfile.role === ROLE_REQUESTER || currentProfile.role === ROLE_STAFF || currentProfile.role === ROLE_ADMIN;
+  const canRequest = currentProfile.role === ROLE_REQUESTER;
   const isAdmin = currentProfile.role === ROLE_ADMIN;
 
   wrap.innerHTML = `
